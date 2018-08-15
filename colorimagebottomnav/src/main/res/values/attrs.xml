@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<declare-styleable name="BottomNavigationView">-->
+    <!--<attr name="curve_radius" format="dimension" />-->
+    <!--<attr name="bar_color" format="color"/>-->
+    <!--</declare-styleable>-->
+
+    <declare-styleable name="BottomNavigationView">
+        <attr name="android:enabled" />
+        <attr name="android:clickable" />
+        <attr name="android:padding" />
+        <attr name="android:paddingLeft" />
+        <attr name="android:paddingTop" />
+        <attr name="android:paddingRight" />
+        <attr name="android:paddingBottom" />
+        <attr name="android:layout_margin" />
+        <attr name="android:layout_marginLeft" />
+        <attr name="android:layout_marginTop" />
+        <attr name="android:layout_marginRight" />
+        <attr name="android:layout_marginBottom" />
+        <attr name="nav_buttonsPadding" format="dimension" />
+        <attr name="nav_buttonsPaddingLeft" format="dimension" />
+        <attr name="nav_buttonsPaddingRight" format="dimension" />
+        <attr name="nav_buttonsPaddingTop" format="dimension" />
+        <attr name="nav_buttonsPaddingBottom" format="dimension" />
+        <attr name="nav_radius" format="dimension" />
+        <attr name="nav_backgroundColor" format="color" />
+        <attr name="nav_enableDeselection" format="boolean" />
+        <attr name="nav_borderSize" format="dimension" />
+        <attr name="nav_borderColor" format="color" />
+        <attr name="nav_dividerSize" format="dimension" />
+        <attr name="nav_dividerPadding" format="dimension" />
+        <attr name="nav_dividerColor" format="color" />
+        <attr name="nav_dividerRadius" format="dimension" />
+        <attr name="nav_selectorDividerSize" format="dimension" />
+        <attr name="nav_selectorDividerPadding" format="dimension" />
+        <attr name="nav_selectorDividerColor" format="color" />
+        <attr name="nav_selectorDividerRadius" format="dimension" />
+        <attr name="nav_selectorFullSize" format="boolean" />
+        <attr name="nav_bottomLineColor" format="color" />
+        <attr name="nav_bottomLineSize" format="dimension" />
+        <attr name="nav_bottomLineBringToFront" format="boolean" />
+        <attr name="nav_bottomLineRadius" format="dimension" />
+        <attr name="nav_selectorTop" format="boolean" />
+        <attr name="nav_selectorBottom" format="boolean" />
+        <attr name="nav_selectorColor" format="color" />
+        <attr name="nav_selectorSize" format="dimension" />
+        <attr name="nav_selectorBringToFront" format="boolean" />
+        <attr name="nav_selectorAboveOfBottomLine" format="boolean" />
+        <attr name="nav_selectorRadius" format="dimension" />
+        <attr name="nav_checkedPosition" format="integer" />
+        <attr name="nav_checkedButton" format="reference" />
+        <attr name="nav_selectorAnimationType">
+            <flag name="translate_x" value="0" />
+            <flag name="translate_y" value="1" />
+            <flag name="scale_x" value="2" />
+            <flag name="scale_y" value="3" />
+            <flag name="alpha" value="4" />
+        </attr>
+        <attr name="nav_animate" format="boolean" />
+        <attr name="nav_animateDrawables_tintColor_duration" format="integer" />
+        <attr name="nav_animateDrawables_tintColorFrom_duration" format="integer" />
+        <attr name="nav_animateDrawables_tintColorTo_duration" format="integer" />
+        <attr name="nav_animateDrawables_tintColorFrom" format="color" />
+        <attr name="nav_animateDrawables_tintColorTo" format="color" />
+        <attr name="nav_animateTexts_textColor_duration" format="integer" />
+        <attr name="nav_animateTexts_textColorFrom_duration" format="integer" />
+        <attr name="nav_animateTexts_textColorTo_duration" format="integer" />
+        <attr name="nav_animateTexts_textColorFrom" format="color" />
+        <attr name="nav_animateTexts_textColorTo" format="color" />
+        <attr name="nav_animateSelector_delay" format="integer" />
+        <attr name="nav_animateSelector_duration" format="integer" />
+        <attr name="nav_animateSelector" format="integer">
+            <flag name="fastOutSlowIn" value="0" />
+            <flag name="bounce" value="1" />
+            <flag name="linear" value="2" />
+            <flag name="decelerate" value="3" />
+            <flag name="cycle" value="4" />
+            <flag name="anticipate" value="5" />
+            <flag name="accelerateDecelerate" value="6" />
+            <flag name="accelerate" value="7" />
+            <flag name="anticipateOvershoot" value="8" />
+            <flag name="fastOutLinearIn" value="9" />
+            <flag name="linearOutSlowIn" value="10" />
+            <flag name="overshoot" value="11" />
+        </attr>
+        <!--<attr name="nav_animateDrawables_duration" format="integer" />-->
+        <!--<attr name="nav_animateDrawables_scale" format="float" />-->
+        <!--<attr name="nav_animateDrawables_enterDuration" format="integer" />-->
+        <!--<attr name="nav_animateDrawables_enter" format="integer">-->
+        <!--<flag name="fastOutSlowIn" value="0" />-->
+        <!--<flag name="bounce" value="1" />-->
+        <!--<flag name="linear" value="2" />-->
+        <!--<flag name="decelerate" value="3" />-->
+        <!--<flag name="cycle" value="4" />-->
+        <!--<flag name="anticipate" value="5" />-->
+        <!--<flag name="accelerateDecelerate" value="6" />-->
+        <!--<flag name="accelerate" value="7" />-->
+        <!--<flag name="anticipateOvershoot" value="8" />-->
+        <!--<flag name="fastOutLinearIn" value="9" />-->
+        <!--<flag name="linearOutSlowIn" value="10" />-->
+        <!--<flag name="overshoot" value="11" />-->
+        <!--</attr>-->
+        <!--<attr name="nav_animateDrawables_exitDuration" format="integer" />-->
+        <!--<attr name="nav_animateDrawables_exit" format="integer">-->
+        <!--<flag name="fastOutSlowIn" value="0" />-->
+        <!--<flag name="bounce" value="1" />-->
+        <!--<flag name="linear" value="2" />-->
+        <!--<flag name="decelerate" value="3" />-->
+        <!--<flag name="cycle" value="4" />-->
+        <!--<flag name="anticipate" value="5" />-->
+        <!--<flag name="accelerateDecelerate" value="6" />-->
+        <!--<flag name="accelerate" value="7" />-->
+        <!--<flag name="anticipateOvershoot" value="8" />-->
+        <!--<flag name="fastOutLinearIn" value="9" />-->
+        <!--<flag name="linearOutSlowIn" value="10" />-->
+        <!--<flag name="overshoot" value="11" />-->
+        <!--</attr>-->
+        <!--<attr name="nav_animateTexts_duration" format="integer" />-->
+        <!--<attr name="nav_animateTexts_scale" format="float" />-->
+        <!--<attr name="nav_animateTexts_enterDuration" format="integer" />-->
+        <!--<attr name="nav_animateTexts_enter" format="integer">-->
+        <!--<flag name="fastOutSlowIn" value="0" />-->
+        <!--<flag name="bounce" value="1" />-->
+        <!--<flag name="linear" value="2" />-->
+        <!--<flag name="decelerate" value="3" />-->
+        <!--<flag name="cycle" value="4" />-->
+        <!--<flag name="anticipate" value="5" />-->
+        <!--<flag name="accelerateDecelerate" value="6" />-->
+        <!--<flag name="accelerate" value="7" />-->
+        <!--<flag name="anticipateOvershoot" value="8" />-->
+        <!--<flag name="fastOutLinearIn" value="9" />-->
+        <!--<flag name="linearOutSlowIn" value="10" />-->
+        <!--<flag name="overshoot" value="11" />-->
+        <!--</attr>-->
+        <!--<attr name="nav_animateTexts_exitDuration" format="integer" />-->
+        <!--<attr name="nav_animateTexts_exit" format="integer">-->
+        <!--<flag name="fastOutSlowIn" value="0" />-->
+        <!--<flag name="bounce" value="1" />-->
+        <!--<flag name="linear" value="2" />-->
+        <!--<flag name="decelerate" value="3" />-->
+        <!--<flag name="cycle" value="4" />-->
+        <!--<flag name="anticipate" value="5" />-->
+        <!--<flag name="accelerateDecelerate" value="6" />-->
+        <!--<flag name="accelerate" value="7" />-->
+        <!--<flag name="anticipateOvershoot" value="8" />-->
+        <!--<flag name="fastOutLinearIn" value="9" />-->
+        <!--<flag name="linearOutSlowIn" value="10" />-->
+        <!--<flag name="overshoot" value="11" />-->
+        <!--</attr>-->
+    </declare-styleable>
+
+    <declare-styleable name="NavigationItem">
+        <attr name="android:enabled" />
+        <attr name="android:clickable" />
+        <attr name="android:background" />
+        <attr name="android:padding" />
+        <attr name="android:paddingLeft" />
+        <attr name="android:paddingRight" />
+        <attr name="android:paddingTop" />
+        <attr name="android:paddingBottom" />
+        <attr name="item_drawable" format="reference" />
+        <attr name="item_drawablePadding" format="dimension" />
+        <attr name="item_drawableTint" format="color" />
+        <attr name="item_drawableTintTo" format="color" />
+        <attr name="item_drawableWidth" format="dimension" />
+        <attr name="item_drawableHeight" format="dimension" />
+        <attr name="item_drawableGravity" format="integer">
+            <flag name="left" value="0" />
+            <flag name="top" value="1" />
+            <flag name="right" value="2" />
+            <flag name="bottom" value="3" />
+        </attr>
+        <attr name="item_text" format="string" />
+        <attr name="item_textColor" format="color" />
+        <attr name="item_textColorTo" format="color" />
+        <attr name="item_textSize" format="dimension" />
+        <attr name="item_textTypeface" format="integer">
+            <flag name="monospace" value="0" />
+            <flag name="normal" value="1" />
+            <flag name="sans" value="2" />
+            <flag name="serif" value="3" />
+        </attr>
+        <attr name="item_textTypefacePath" format="string" />
+        <attr name="item_textFillSpace" format="boolean" />
+        <attr name="item_textStyle" format="integer">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
+        <attr name="item_textGravity" format="integer">
+            <flag name="left" value="0" />
+            <flag name="center" value="1" />
+            <flag name="right" value="2" />
+        </attr>
+        <attr name="item_checked" format="boolean" />
+        <attr name="item_backgroundColor" format="color" />
+        <attr name="item_ripple" format="boolean" />
+        <attr name="item_rippleColor" format="color" />
+        <attr name="item_selectorColor" format="color" />
+    </declare-styleable>
+</resources>
