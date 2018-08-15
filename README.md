@@ -88,9 +88,5 @@ bottomNavigationView.setOnClickedButtonListener(new BottomNavigationView.OnClick
 });
 ```
         
-## Example
-![BottomNavigation Image]
-()
-
-![BottomNavigation Item selected Image]
-()
+## Screenshots
+<img src="https://raw.github.com/venky97vp/ColorImageBottomNav/master/images/img1.png" width="250"> <img src="https://raw.github.com/venky97vp/ColorImageBottomNav/master/images/img2.png" width="250">
