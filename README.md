@@ -1,5 +1,5 @@
 # Bottom Navigation with Color Image Library
-Android library for Bottom navigation where images of the items can be a colored Image. 
+ColorImageBottomNav is an Android library for Bottom navigation with color image support. Usually, the default BottomNavigation from andorid, does not support colored images (i.e., The images are force tinted to single color) in the menu items. ColorImageBottomNav supports both png and svg with color.
 
 ## Installation
 ### For Gradle:
