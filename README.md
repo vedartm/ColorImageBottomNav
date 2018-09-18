@@ -3,7 +3,7 @@ ColorImageBottomNav is an Android library for Bottom navigation with color image
 
 ## Installation
 ### For Gradle:
-Step 1. Add the JitPack repository to your build file
+#### 1. Add the JitPack repository to your build file
 ```
 allprojects {
   repositories {
@@ -12,7 +12,7 @@ allprojects {
   }
 }
 ```  
-Step 2. Add the dependency
+#### 2. Add the dependency
 ```
 dependencies {
   implementation 'com.github.venky97vp:ColorImageBottomNav:1.0.0'
@@ -20,7 +20,7 @@ dependencies {
 ```
 
 ### For Maven:
-Step 1. Add the JitPack repository to your build file
+#### 1. Add the JitPack repository to your build file
 ```
 <repositories>
 	<repository>
@@ -29,7 +29,7 @@ Step 1. Add the JitPack repository to your build file
 	</repository>
 </repositories>
 ```
-Step 2. Add the dependency
+#### 2. Add the dependency
 ```
 <dependency>
 	<groupId>com.github.venky97vp</groupId>
