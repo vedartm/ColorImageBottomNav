@@ -17,41 +17,27 @@
         app:nav_selectorRadius="4dp"
         app:nav_selectorSize="4dp">
 
-        <com.vplibs.colorimagebottomnav.NavigationItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:item_drawable="@drawable/ic_home"
-            app:item_drawableGravity="top"
-            app:item_drawableHeight="36dp"
-            app:item_drawablePadding="4dp"
-            app:item_drawableWidth="36dp" />
+        <!--<com.vplibs.colorimagebottomnav.NavigationItem-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:item_drawable="@drawable/ic_home" />-->
 
-        <com.vplibs.colorimagebottomnav.NavigationItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:item_drawable="@drawable/ic_event"
-            app:item_drawableGravity="top"
-            app:item_drawableHeight="36dp"
-            app:item_drawablePadding="4dp"
-            app:item_drawableWidth="36dp" />
+        <!--<com.vplibs.colorimagebottomnav.NavigationItem-->
+        <!--android:id="@+id/to_hide"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:item_drawable="@drawable/ic_event"-->
+        <!--app:item_text="asdfsdf" />-->
 
-        <com.vplibs.colorimagebottomnav.NavigationItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:item_drawable="@drawable/ic_search"
-            app:item_drawableGravity="top"
-            app:item_drawableHeight="36dp"
-            app:item_drawablePadding="4dp"
-            app:item_drawableWidth="36dp" />
+        <!--<com.vplibs.colorimagebottomnav.NavigationItem-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:item_drawable="@drawable/ic_search" />-->
 
-        <com.vplibs.colorimagebottomnav.NavigationItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:item_drawable="@drawable/ic_profile"
-            app:item_drawableGravity="top"
-            app:item_drawableHeight="36dp"
-            app:item_drawablePadding="4dp"
-            app:item_drawableWidth="36dp" />
+        <!--<com.vplibs.colorimagebottomnav.NavigationItem-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:item_drawable="@drawable/ic_profile" />-->
 
     </com.vplibs.colorimagebottomnav.BottomNavigationView>
 

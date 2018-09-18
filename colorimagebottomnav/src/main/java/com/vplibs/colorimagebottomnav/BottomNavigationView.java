@@ -11,6 +11,7 @@ import android.support.v4.view.animation.FastOutLinearInInterpolator;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 public class BottomNavigationView extends RoundedCornerLayout implements NavigationItem.OnSelectorColorChangedListener {
 
@@ -264,22 +267,6 @@ public class BottomNavigationView extends RoundedCornerLayout implements Navigat
 
         radius = ta.getDimension(R.styleable.BottomNavigationView_nav_radius, 0);
 
-//        animateDrawablesEnter = ta.getInt(R.styleable.BottomNavigationView_nav_animateDrawables_enter, 0);
-//        hasAnimateDrawables = ta.hasValue(R.styleable.BottomNavigationView_nav_animateDrawables_enter);
-//        animateDrawablesExit = ta.getInt(R.styleable.BottomNavigationView_nav_animateDrawables_exit, 0);
-//        int animateDrawablesDuration = ta.getInt(R.styleable.BottomNavigationView_nav_animateDrawables_duration, 500) / 2;
-//        animateDrawablesEnterDuration = ta.getInt(R.styleable.BottomNavigationView_nav_animateDrawables_enterDuration, animateDrawablesDuration);
-//        animateDrawablesExitDuration = ta.getInt(R.styleable.BottomNavigationView_nav_animateDrawables_exitDuration, animateDrawablesDuration);
-//        animateDrawablesScale = ta.getFloat(R.styleable.BottomNavigationView_nav_animateDrawables_scale, 1.2f);
-//
-//        animateTextsEnter = ta.getInt(R.styleable.BottomNavigationView_nav_animateTexts_enter, 0);
-//        hasAnimateTexts = ta.hasValue(R.styleable.BottomNavigationView_nav_animateTexts_enter);
-//        animateTextsExit = ta.getInt(R.styleable.BottomNavigationView_nav_animateTexts_exit, 0);
-//        int animateTextsDuration = ta.getInt(R.styleable.BottomNavigationView_nav_animateTexts_duration, 500) / 2;
-//        animateTextsEnterDuration = ta.getInt(R.styleable.BottomNavigationView_nav_animateTexts_enterDuration, animateTextsDuration);
-//        animateTextsExitDuration = ta.getInt(R.styleable.BottomNavigationView_nav_animateTexts_exitDuration, animateTextsDuration);
-//        animateTextsScale = ta.getFloat(R.styleable.BottomNavigationView_nav_animateTexts_scale, 1.2f);
-
         lastPosition = initialPosition = ta.getInt(R.styleable.BottomNavigationView_nav_checkedPosition, -1);
         checkedButtonId = ta.getResourceId(R.styleable.BottomNavigationView_nav_checkedButton, NO_ID);
 
@@ -331,11 +318,67 @@ public class BottomNavigationView extends RoundedCornerLayout implements Navigat
 
     private int numberOfButtons = 0;
 
+    public void addAllItems(ArrayList<NavigationItem> items) {
+        for (NavigationItem item : items) {
+            addItem(item);
+        }
+    }
+
+    public void addItem(NavigationItem item) {
+        int position = buttons.size();
+        int id = item.getId();
+
+        if (lastPosition == -1) {
+            if (checkedButtonId != NO_ID && checkedButtonId == id)
+                lastPosition = initialPosition = position;
+            else if (checkedButtonId == NO_ID && item.isChecked())
+                lastPosition = initialPosition = position;
+        }
+
+        if (lastPosition == position) {
+            item.setChecked(true);
+
+            if (item.hasTextColorTo()) {
+                item.setCheckedTextColor(item.getTextColorTo());
+            } else if (hasAnimateTextsColor) {
+                item.setCheckedTextColor(animateTextsColorEnter);
+            }
+
+            if (item.hasDrawableTintTo()) {
+                item.setCheckedDrawableTint(item.getDrawableTintTo());
+            } else if (hasAnimateDrawablesTint) {
+                item.setCheckedDrawableTint(animateDrawablesTintEnter);
+            }
+
+        } else {
+            item.setChecked(false);
+
+            if (!item.hasTextColor() && hasAnimateTextsColor)
+                item.setTextColor(animateTextsColorExit);
+
+            if (!item.hasDrawableTint() && hasAnimateDrawablesTint)
+                item.setDrawableTint(animateDrawablesTintExit);
+        }
+
+        initButtonListener(item, position);
+        setButtonPadding(item);
+        container.addView(item);
+        if (item.isShown()) {
+            Log.d(TAG, "addView: " + buttons.size());
+            createSelectorItem(position, item);
+            buttons.add(item);
+        }
+
+        numberOfButtons = buttons.size();
+    }
+
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
         if (child instanceof NavigationItem) {
             NavigationItem button = (NavigationItem) child;
-
+//            if (child.getVisibility() == View.GONE) {
+//                return;
+//            }
             int position = buttons.size();
 
             int id = button.getId();
@@ -349,11 +392,6 @@ public class BottomNavigationView extends RoundedCornerLayout implements Navigat
 
             if (lastPosition == position) {
                 button.setChecked(true);
-
-//                if (hasAnimateDrawables)
-//                    button.bounceDrawable(animateDrawablesScale);
-//                if (hasAnimateTexts)
-//                    button.bounceText(animateTextsScale);
 
                 if (button.hasTextColorTo()) {
                     button.setCheckedTextColor(button.getTextColorTo());
@@ -380,8 +418,11 @@ public class BottomNavigationView extends RoundedCornerLayout implements Navigat
             initButtonListener(button, position);
             setButtonPadding(button);
             container.addView(button);
-            createSelectorItem(position, button);
-            buttons.add(button);
+            if (button.isShown()) {
+                Log.d(TAG, "addView: " + buttons.size());
+                createSelectorItem(position, button);
+                buttons.add(button);
+            }
 
             numberOfButtons = buttons.size();
         } else
@@ -389,6 +430,8 @@ public class BottomNavigationView extends RoundedCornerLayout implements Navigat
     }
 
     private void createSelectorItem(int position, NavigationItem button) {
+        if (!button.isShown())
+            return;
         BackgroundView view = new BackgroundView(getContext());
 
         int height = selectorSize;
@@ -513,46 +556,6 @@ public class BottomNavigationView extends RoundedCornerLayout implements Navigat
     public int getPosition() {
         return lastPosition;
     }
-
-//    /* DRAWABLE AND TEXT ANIMATION BEGINS */
-//    private void animateTextAndDrawable(int toPosition, boolean hasAnimation, NavigationItem buttonIn, NavigationItem buttonOut, boolean enableDeselection) {
-//        if (lastPosition == toPosition && enableDeselection) {
-//            if (buttonIn.isChecked())
-//                animateExit(buttonIn, hasAnimation);
-//            else
-//                animateEnter(buttonIn, hasAnimation);
-//        } else {
-//            if (null != buttonOut)
-//                animateExit(buttonOut, hasAnimation);
-//            if (null != buttonIn)
-//                animateEnter(buttonIn, hasAnimation);
-//        }
-//    }
-//
-//    private void animateColorTransitions(NavigationItem button, boolean hasAnimation, boolean onEnter) {
-//        int textDuration = onEnter ? animateTextsColorDurationEnter : animateTextsColorDurationExit;
-//        int drawableDuration = onEnter ? animateDrawablesTintDurationEnter : animateDrawablesTintDurationExit;
-//
-//        button.colorTransitionText(hasAnimateTextsColor, animateTextsColorExit, animateTextsColorEnter, textDuration, hasAnimation, onEnter);
-//        button.colorTransitionDrawable(hasAnimateDrawablesTint, animateDrawablesTintExit, animateDrawablesTintEnter, drawableDuration, hasAnimation, onEnter);
-//    }
-//
-//    private void animateExit(NavigationItem button, boolean hasAnimation) {
-//        if (hasAnimateTexts)
-//            button.bounceText(1, animateTextsExitDuration, interpolatorTextExit, hasAnimation);
-//        if (hasAnimateDrawables)
-//            button.bounceDrawable(1, animateDrawablesExitDuration, interpolatorDrawablesExit, hasAnimation);
-//        animateColorTransitions(button, hasAnimation, false);
-//    }
-
-//    private void animateEnter(NavigationItem button, boolean hasAnimation) {
-//        if (hasAnimateTexts)
-//            button.bounceText(animateTextsScale, animateTextsEnterDuration, interpolatorText, hasAnimation);
-//        if (hasAnimateDrawables)
-//            button.bounceDrawable(animateDrawablesScale, animateDrawablesEnterDuration, interpolatorDrawablesEnter, hasAnimation);
-//        animateColorTransitions(button, hasAnimation, true);
-//    }
-    /* DRAWABLE AND TEXT ANIMATION ENDS */
 
     public final int ANIM_TRANSLATE_X = 0;
     public final int ANIM_TRANSLATE_Y = 1;

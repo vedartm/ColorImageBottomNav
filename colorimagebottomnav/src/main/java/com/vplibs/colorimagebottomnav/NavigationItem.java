@@ -15,16 +15,12 @@
  */
 package com.vplibs.colorimagebottomnav;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -32,38 +28,28 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 public class NavigationItem extends LinearLayout {
-    public NavigationItem(Context context) {
+
+    public NavigationItem(Context context, int drawable) {
         super(context);
-        this.init(null);
+        this.init(drawable);
     }
 
-    public NavigationItem(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        this.init(attrs);
-    }
+    private void init(int drawable) {
+        getAttributes();
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public NavigationItem(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        this.init(attrs);
-    }
-
-    private void init(AttributeSet attrs) {
-        getAttributes(attrs);
-
-        initViews();
+        initViews(drawable);
 
         setDrawableGravity();
         setState();
 
-        super.setPadding(0, 0, 0, 0);
+        super.setPadding(16, 16, 16, 16);
         setPaddingAttrs();
     }
 
     private AppCompatImageView imageView;
     private AppCompatTextView textView;
 
-    private void initViews() {
+    private void initViews(int drawable) {
         setLayoutParams(new LayoutParams(0, LayoutParams.MATCH_PARENT, 1));
         setOrientation(HORIZONTAL);
         setGravity(Gravity.CENTER);
@@ -72,6 +58,7 @@ public class NavigationItem extends LinearLayout {
         imageView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT) {{
             gravity = Gravity.CENTER;
         }});
+        setDrawable(drawable);
         setDrawableAttrs();
         addView(imageView);
 
@@ -81,6 +68,11 @@ public class NavigationItem extends LinearLayout {
         }});
         setTextAttrs();
         addView(textView);
+        if (show) {
+            this.setVisibility(View.VISIBLE);
+        } else {
+            this.setVisibility(View.GONE);
+        }
     }
 
     private Typeface defaultTypeface, textTypeface;
@@ -94,39 +86,39 @@ public class NavigationItem extends LinearLayout {
     private boolean hasPaddingLeft, hasPaddingRight, hasPaddingTop, hasPaddingBottom, hasDrawableTint, hasTextTypefacePath,
             hasDrawable, hasText, hasDrawableWidth, hasDrawableHeight, checked, enabled, hasEnabled, clickable, hasClickable,
             hasTextStyle, hasTextSize, hasTextColor, textFillSpace, hasSelectorColor,
-            hasDrawableTintTo, hasTextColorTo;
+            hasDrawableTintTo, hasTextColorTo, show;
 
     /***
      * GET ATTRIBUTES FROM XML
      */
-    private void getAttributes(AttributeSet attrs) {
-        TypedArray ta = getContext().obtainStyledAttributes(attrs, R.styleable.NavigationItem);
+    private void getAttributes() {
 
-        drawable = ta.getResourceId(R.styleable.NavigationItem_item_drawable, -1);
-        drawableTint = ta.getColor(R.styleable.NavigationItem_item_drawableTint, 0);
-        drawableTintTo = ta.getColor(R.styleable.NavigationItem_item_drawableTintTo, 0);
-        drawableWidth = ta.getDimensionPixelSize(R.styleable.NavigationItem_item_drawableWidth, -1);
-        drawableHeight = ta.getDimensionPixelSize(R.styleable.NavigationItem_item_drawableHeight, -1);
+        drawable = -1;
+        drawableTint = 0;
+        drawableTintTo = 0;
+        drawableWidth = -1;
+        drawableHeight = -1;
 
-        hasDrawable = ta.hasValue(R.styleable.NavigationItem_item_drawable);
-        hasDrawableTint = ta.hasValue(R.styleable.NavigationItem_item_drawableTint);
-        hasDrawableTintTo = ta.hasValue(R.styleable.NavigationItem_item_drawableTintTo);
-        hasDrawableWidth = ta.hasValue(R.styleable.NavigationItem_item_drawableWidth);
-        hasDrawableHeight = ta.hasValue(R.styleable.NavigationItem_item_drawableHeight);
+        hasDrawable = true;
+        hasDrawableTint = false;
+        hasDrawableTintTo = false;
+        hasDrawableWidth = false;
+        hasDrawableHeight = false;
 
-        text = ta.getString(R.styleable.NavigationItem_item_text);
-        hasText = ta.hasValue(R.styleable.NavigationItem_item_text);
-        textColor = ta.getColor(R.styleable.NavigationItem_item_textColor, Color.BLACK);
-        textColorTo = ta.getColor(R.styleable.NavigationItem_item_textColorTo, Color.BLACK);
+        text = "";
+        hasText = false;
+        textColor = Color.BLACK;
+        textColorTo = Color.BLACK;
 
-        hasTextColor = ta.hasValue(R.styleable.NavigationItem_item_textColor);
-        hasTextColorTo = ta.hasValue(R.styleable.NavigationItem_item_textColorTo);
-        textSize = ta.getDimensionPixelSize(R.styleable.NavigationItem_item_textSize, -1);
-        hasTextSize = ta.hasValue(R.styleable.NavigationItem_item_textSize);
-        textStyle = ta.getInt(R.styleable.NavigationItem_item_textStyle, -1);
-        hasTextStyle = ta.hasValue(R.styleable.NavigationItem_item_textStyle);
+        hasTextColor = false;
+        hasTextColorTo = false;
+        textSize = -1;
+        hasTextSize = false;
+        textStyle = -1;
+        hasTextStyle = false;
+        show = true;
 
-        int typeface = ta.getInt(R.styleable.NavigationItem_item_textTypeface, -1);
+        int typeface = -1;
         switch (typeface) {
             case 0:
                 textTypeface = Typeface.MONOSPACE;
@@ -141,42 +133,54 @@ public class NavigationItem extends LinearLayout {
                 textTypeface = Typeface.SERIF;
                 break;
         }
-        textTypefacePath = ta.getString(R.styleable.NavigationItem_item_textTypefacePath);
-        hasTextTypefacePath = ta.hasValue(R.styleable.NavigationItem_item_textTypefacePath);
+        textTypefacePath = "";
+        hasTextTypefacePath = false;
 
-        backgroundColor = ta.getColor(R.styleable.NavigationItem_item_backgroundColor, Color.TRANSPARENT);
+        backgroundColor = Color.TRANSPARENT;
 
-        int defaultPadding = Helper.dpToPx(getContext(), 10);
-        padding = ta.getDimensionPixelSize(R.styleable.NavigationItem_android_padding, defaultPadding);
-        paddingLeft = ta.getDimensionPixelSize(R.styleable.NavigationItem_android_paddingLeft, 0);
-        paddingRight = ta.getDimensionPixelSize(R.styleable.NavigationItem_android_paddingRight, 0);
-        paddingTop = ta.getDimensionPixelSize(R.styleable.NavigationItem_android_paddingTop, 0);
-        paddingBottom = ta.getDimensionPixelSize(R.styleable.NavigationItem_android_paddingBottom, 0);
+        int defaultPadding = Helper.dpToPx(getContext(), 5);
+        padding = defaultPadding;
+        paddingLeft = 0;
+        paddingRight = 0;
+        paddingTop = 0;
+        paddingBottom = 0;
 
-        hasPaddingLeft = ta.hasValue(R.styleable.NavigationItem_android_paddingLeft);
-        hasPaddingRight = ta.hasValue(R.styleable.NavigationItem_android_paddingRight);
-        hasPaddingTop = ta.hasValue(R.styleable.NavigationItem_android_paddingTop);
-        hasPaddingBottom = ta.hasValue(R.styleable.NavigationItem_android_paddingBottom);
+        hasPaddingLeft = false;
+        hasPaddingRight = false;
+        hasPaddingTop = false;
+        hasPaddingBottom = false;
 
-        drawablePadding = ta.getDimensionPixelSize(R.styleable.NavigationItem_item_drawablePadding, 4);
+        drawablePadding = 4;
 
-        drawableGravity = DrawableGravity.getById(ta.getInteger(R.styleable.NavigationItem_item_drawableGravity, 0));
+        drawableGravity = DrawableGravity.TOP;
 
-        checked = ta.getBoolean(R.styleable.NavigationItem_item_checked, false);
+        checked = false;
 
-        enabled = ta.getBoolean(R.styleable.NavigationItem_android_enabled, true);
-        hasEnabled = ta.hasValue(R.styleable.NavigationItem_android_enabled);
-        clickable = ta.getBoolean(R.styleable.NavigationItem_android_clickable, true);
-        hasClickable = ta.hasValue(R.styleable.NavigationItem_android_clickable);
+        enabled = true;
+        hasEnabled = false;
+        clickable = true;
+        hasClickable = false;
 
-        textGravity = ta.getInt(R.styleable.NavigationItem_item_textGravity, Gravity.NO_GRAVITY);
+        textGravity = Gravity.CENTER_HORIZONTAL;
 
-        textFillSpace = ta.getBoolean(R.styleable.NavigationItem_item_textFillSpace, false);
+        textFillSpace = false;
 
-        selectorColor = ta.getColor(R.styleable.NavigationItem_item_selectorColor, Color.TRANSPARENT);
-        hasSelectorColor = ta.hasValue(R.styleable.NavigationItem_item_selectorColor);
+        selectorColor = Color.TRANSPARENT;
+        hasSelectorColor = false;
+    }
 
-        ta.recycle();
+    public void show() {
+        this.show = true;
+        this.setVisibility(View.VISIBLE);
+    }
+
+    public void hide() {
+        this.show = false;
+        this.setVisibility(View.GONE);
+    }
+
+    public boolean isShown() {
+        return this.show;
     }
 
     public int getTextColorTo() {
@@ -260,8 +264,12 @@ public class NavigationItem extends LinearLayout {
 
             if (hasDrawableWidth)
                 setDrawableWidth(drawableWidth);
+            else
+                setDrawableWidth(Helper.dpToPx(getContext(), 36));
             if (hasDrawableHeight)
                 setDrawableHeight(drawableHeight);
+            else
+                setDrawableHeight(Helper.dpToPx(getContext(), 36));
         } else {
             imageView.setVisibility(GONE);
         }
@@ -669,6 +677,12 @@ public class NavigationItem extends LinearLayout {
             setEnabled(enabled);
         else
             setClickable(clickable);
+        if (show) {
+            show();
+        } else {
+            hide();
+            setClickable(false);
+        }
     }
 
     @Override
