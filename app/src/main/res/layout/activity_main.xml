@@ -15,30 +15,6 @@
         app:nav_dividerSize="1dp"
         app:nav_selectorColor="@color/colorAccent"
         app:nav_selectorRadius="4dp"
-        app:nav_selectorSize="4dp">
-
-        <!--<com.vplibs.colorimagebottomnav.NavigationItem-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:item_drawable="@drawable/ic_home" />-->
-
-        <!--<com.vplibs.colorimagebottomnav.NavigationItem-->
-        <!--android:id="@+id/to_hide"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:item_drawable="@drawable/ic_event"-->
-        <!--app:item_text="asdfsdf" />-->
-
-        <!--<com.vplibs.colorimagebottomnav.NavigationItem-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:item_drawable="@drawable/ic_search" />-->
-
-        <!--<com.vplibs.colorimagebottomnav.NavigationItem-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:item_drawable="@drawable/ic_profile" />-->
-
-    </com.vplibs.colorimagebottomnav.BottomNavigationView>
+        app:nav_selectorSize="4dp"/>
 
 </RelativeLayout>

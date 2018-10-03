@@ -1,7 +1,7 @@
 package com.vplibs.colorimagebottomnavexample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.vplibs.colorimagebottomnav.BottomNavigationView;
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationItem item1 = new NavigationItem(MainActivity.this, R.drawable.ic_event);
         NavigationItem item2 = new NavigationItem(MainActivity.this, R.drawable.ic_search);
         NavigationItem item3 = new NavigationItem(MainActivity.this, R.drawable.ic_profile);
-        item.hide();
+//        item.hide();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
